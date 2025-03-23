@@ -7,38 +7,21 @@
 #include "new.h"
 
 int main(int argc, char *argv[]) {
-  implacement_allocator<int> alloc;
-
-  std::vector<int, implacement_allocator<int>> v(alloc);
-  std::vector<float> v2;
 
   try {
-    for (int i = 0; i < 100; i++) {
-      v.emplace_back(i);
+    auto m10 = std::map<int, int, std::less<int>,
+                      implacement_allocator_n<std::pair<const int, int>, 10>>{};
+
+    for (int i = 0; i < 10; ++i) {
+      m10[i] = i;
     }
 
-    std::for_each(v.begin(), v.end(), [](int val) { std::cout << val << " "; });
+    std::for_each(m10.begin(), m10.end(), 
+                  [](const std::pair<int, int> &p) {
+                    std::cout << p.first << " -> " << p.second << std::endl;
+                  });
     std::cout << "\n";
 
-    for (int i = 0; i < 100; i++) {
-      v2.emplace_back(i);
-    }
-
-    std::for_each(v2.begin(), v2.end(),
-                  [](int val) { std::cout << val << " "; });
-    std::cout << "\n";
-
-    auto m = std::map<int, float, std::less<int>,
-                      implacement_allocator<std::pair<const int, float>>>{};
-
-    for (int i = 0; i < 120; ++i) {
-      m[i] = static_cast<float>(i);
-    }
-
-    std::for_each(m.begin(), m.end(), [](const std::pair<int, float> &p) {
-      std::cout << p.first << " -> " << (p.second / 2) << std::endl;
-    });
-    std::cout << "\n";
   } catch (const std::exception &e) {
     std::cerr << e.what() << '\n';
   }
