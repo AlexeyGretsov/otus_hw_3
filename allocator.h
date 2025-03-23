@@ -51,6 +51,10 @@ public:
   using value_type = T;
 
   static size_t pos;
+  /*
+  * Для vector нужно размер умножать на 4, иначе алгоритму релокации не хватает данных
+  */
+//  static constexpr size_t size = sizeof(T) * items_number * 4;
   static constexpr size_t size = sizeof(T) * items_number;
   static uint8_t data[size];
 
@@ -66,11 +70,13 @@ public:
   };
 
   T *allocate(size_t n) {
-    if (pos + n > size)
+    std::cout << "implacement_allocator_n::allocate: size = " << size
+              << ", pos = " << pos << ", n = " << n << std::endl;
+    if (pos + (n * sizeof(T)) > size)
       throw std::bad_alloc();
 
     size_t cur = pos;
-    pos += n;
+    pos += n * sizeof(T);
     return reinterpret_cast<T *>(data) + cur;
   }
 
