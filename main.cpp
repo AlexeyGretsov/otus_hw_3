@@ -7,8 +7,6 @@
 #include "new.h"
 
 int main(int argc, char *argv[]) {
-  std::cout << "Allocators test\n";
-
   implacement_allocator<int> alloc;
 
   std::vector<int, implacement_allocator<int>> v(alloc);
