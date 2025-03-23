@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
     auto m = std::map<int, float, std::less<int>,
                       implacement_allocator<std::pair<const int, float>>>{};
 
-    for (int i = 0; i < 1200; ++i) {
+    for (int i = 0; i < 120; ++i) {
       m[i] = static_cast<float>(i);
     }
 
