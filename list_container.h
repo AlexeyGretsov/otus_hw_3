@@ -80,9 +80,7 @@ public:
   };
 
   Iterator begin() const { return Iterator(head); }
-
   Iterator end() const { return Iterator(nullptr); }
-
   allocator_type get_allocator() const { return allocator; }
 
 private:

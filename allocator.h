@@ -22,13 +22,16 @@ public:
   };
 
   T *allocate(size_t n) {
-    std::cout << __PRETTY_FUNCTION__ << ": size = " << size << ", pos = " << pos
-              << ", n = " << n << std::endl;
     if (pos + (n * sizeof(T)) > size)
       throw std::bad_alloc();
 
     size_t cur = pos;
     pos += n * sizeof(T);
+
+    std::cout << __PRETTY_FUNCTION__ << " Allocate " << n
+              << " item(s). Full allocated " << pos << " of " << size
+              << std::endl;
+
     return reinterpret_cast<T *>(data) + cur;
   }
 
