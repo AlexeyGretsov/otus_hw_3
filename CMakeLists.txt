@@ -7,6 +7,7 @@ find_package(GTest REQUIRED)
 
 add_executable(${CMAKE_PROJECT_NAME} 
 	allocator.h
+	list_container.h
 	main.cpp
 )
 
