@@ -6,7 +6,7 @@
 #include "allocator.h"
 #include "list_container.h"
 
-//#define PRINT_SIMPLE_TYPES
+// #define PRINT_SIMPLE_TYPES
 
 namespace {
 const size_t MAX_ITEMS_COUNT = 10;
