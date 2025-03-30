@@ -32,10 +32,12 @@ public:
     //           << " item(s). Full allocated " << pos << " of " << size
     //           << std::endl;
 
-    return reinterpret_cast<T *>(data) + cur;
+    return reinterpret_cast<T *>(data + cur);
   }
 
-  void deallocate(T *p, size_t n) {}
+  void deallocate(T *p, size_t n) {
+    // std::cout << __PRETTY_FUNCTION__ << " Allocate " << n << std::endl;
+  }
 };
 
 template <typename T, size_t items_number>
