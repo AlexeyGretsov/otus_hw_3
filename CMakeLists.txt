@@ -6,7 +6,6 @@ enable_testing()
 find_package(GTest REQUIRED)
 
 add_executable(${CMAKE_PROJECT_NAME} 
-	new.h
 	allocator.h
 	main.cpp
 )

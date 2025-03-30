@@ -2,59 +2,11 @@
 
 #include <memory>
 
-#if 0
-template <typename T> class implacement_allocator {
-public:
-  using value_type = T;
-
-  static size_t pos;
-  static constexpr size_t size = sizeof(T) * 1000;
-  static uint8_t data[size];
-
-  implacement_allocator() noexcept {}
-  ~implacement_allocator() {}
-
-  template <typename U>
-  implacement_allocator(const implacement_allocator<U> &) noexcept {}
-
-  T *allocate(size_t n) {
-    if (pos + n > size)
-      throw std::bad_alloc();
-
-    size_t cur = pos;
-    pos += n;
-    return reinterpret_cast<T *>(data) + cur;
-  }
-
-  void deallocate(T *p, size_t n) {}
-};
-
-template <typename T> uint8_t implacement_allocator<T>::data[size];
-
-template <typename T> size_t implacement_allocator<T>::pos = 0;
-
-template <class T, class U>
-constexpr bool operator==(const implacement_allocator<T> &a1,
-                          const implacement_allocator<U> &a2) noexcept {
-  return true;
-}
-
-template <class T, class U>
-constexpr bool operator!=(const implacement_allocator<T> &a1,
-                          const implacement_allocator<U> &a2) noexcept {
-  return false;
-}
-#endif
-
 template <typename T, size_t items_number> class implacement_allocator_n {
 public:
   using value_type = T;
 
   static size_t pos;
-  /*
-  * Для vector нужно размер умножать на 4, иначе алгоритму релокации не хватает данных
-  */
-//  static constexpr size_t size = sizeof(T) * items_number * 4;
   static constexpr size_t size = sizeof(T) * items_number;
   static uint8_t data[size];
 
@@ -70,8 +22,8 @@ public:
   };
 
   T *allocate(size_t n) {
-    std::cout << "implacement_allocator_n::allocate: size = " << size
-              << ", pos = " << pos << ", n = " << n << std::endl;
+    std::cout << __PRETTY_FUNCTION__ << ": size = " << size << ", pos = " << pos
+              << ", n = " << n << std::endl;
     if (pos + (n * sizeof(T)) > size)
       throw std::bad_alloc();
 
