@@ -28,9 +28,9 @@ public:
     size_t cur = pos;
     pos += n * sizeof(T);
 
-    std::cout << __PRETTY_FUNCTION__ << " Allocate " << n
-              << " item(s). Full allocated " << pos << " of " << size
-              << std::endl;
+    // std::cout << __PRETTY_FUNCTION__ << " Allocate " << n
+    //           << " item(s). Full allocated " << pos << " of " << size
+    //           << std::endl;
 
     return reinterpret_cast<T *>(data) + cur;
   }
