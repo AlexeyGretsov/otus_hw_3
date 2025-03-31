@@ -36,7 +36,7 @@ public:
   }
 
   void deallocate(T *p, size_t n) {
-    // std::cout << __PRETTY_FUNCTION__ << " Allocate " << n << std::endl;
+    // std::cout << __PRETTY_FUNCTION__ << " Deallocate " << n << " item(n)" << std::endl;
   }
 };
 
